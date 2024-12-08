@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>L Systems</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #100f0f;
+        }
+        canvas {
+            background-color: #000; 
+            border: 2px solid #444; 
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.7); 
+            max-width: 90vw; 
+            max-height: 80vh; 
+        }
+        h1 {
+            position: absolute;
+            top: 20px;
+            color: #fff;
+            font-family: Arial, sans-serif;
+        }
+    </style>
+    <script src="../lindenmayer.browser.js"></script>
+</head>
+
+
+<body>
+    <canvas id="canvas"></canvas>
+    <h1>SANTA</h1>
+    <script>
+        window.onload = function () {
+            const canvas = document.getElementById("canvas");
+            canvas.width = window.innerWidth * 0.9;
+            canvas.height = window.innerHeight * 0.8;
+            
+            const context = canvas.getContext("2d");
+            context.translate(canvas.width / 4, 7*canvas.height/8);  
+            context.lineWidth = 3;
+            const step = 20;
+            const stack = [];
+            context.rotate(2*Math.PI/6);  
+            const angle = Math.PI / 180 * 75; // 75 degrees
+            context.strokeStyle = "#fff";  
+            context.scale(2/4, 2/4); 
+            const productionsSanta = {
+                F: 'FAFCFAF'
+            };
+
+            // L-system setup
+            let santa = new LSystem({
+                axiom: "F",
+                productions: productionsSanta,
+                finals: {
+                    A: () => {
+                        context.rotate(-angle);  
+                    },
+                    F: () => {
+                        context.beginPath();
+                        context.moveTo(0, 0);  
+                        context.lineTo(0, -step);  
+                        context.stroke();  
+                        context.translate(0, -step);  
+                    },
+                    C: () => {
+                        context.rotate(angle * 2);  
+                    }
+                }
+            });
+
+            santa.iterate(5);  
+            santa.final(); 
+        };
+    </script>
+</body>
+
+</html>

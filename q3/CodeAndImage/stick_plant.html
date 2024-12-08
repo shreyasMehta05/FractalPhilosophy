@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Stick Plant L-System</title>
+    <script src="../lindenmayer.browser.js"></script>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            overflow: hidden; 
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #100f0f; 
+        }
+        canvas {
+            background-color: #000; 
+            border: 2px solid #444; 
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.7); 
+            max-width: 90vw; 
+            max-height: 80vh; 
+        }
+        h1 {
+            position: absolute;
+            top: 20px;
+            color: #fff;
+            font-family: Arial, sans-serif;
+        }
+    </style>
+</head>
+<body>
+    <h1>Stick Plant L-System</h1>
+    <canvas id="canva"></canvas>
+    <script>
+window.onload = function() {
+    const canva = document.getElementById("canva");
+    canva.width = window.innerWidth * 0.9;
+    canva.height = window.innerHeight * 0.8;
+    
+    const context = canva.getContext("2d");
+    context.lineWidth = 3;
+    const step = 100;
+    const stack = [];
+    const angle = Math.PI / 180 *45; 
+
+    const productionStickPlant = {
+        F: "S[+F]F[-F]SF",
+        S: "SS"
+    };
+
+    let stickPlant = new LSystem({
+        axiom: "F",
+        productions: productionStickPlant,
+        finals: {
+            X: () => {},
+            F: () => {
+                context.beginPath();
+                context.moveTo(0, 0);
+                context.lineTo(0, step);
+                context.strokeStyle = "lightgreen";
+                context.stroke();
+                context.translate(0, step);
+            },
+            S: () => {
+                context.beginPath();
+                context.moveTo(0, 0);
+                context.lineTo(0,step);
+                context.strokeStyle = "lightgreen";
+                context.stroke();
+                context.translate(0,step);
+            },
+            "+": () => {
+                context.rotate(angle);
+            },
+            "-": () => {
+                context.rotate(-angle);
+            },
+            "[": () => {
+                context.save();
+                stack.push(context.getTransform());
+            },
+            "]": () => {
+                context.restore();
+                context.setTransform(stack.pop());
+            }
+        }
+    });
+
+    context.translate(canva.width / 2, canva.height);
+    context.rotate(Math.PI);
+    context.scale(1/4, 1/4);
+    stickPlant.iterate(2);
+    stickPlant.final();
+    
+    window.onresize = () => {
+        canva.width = window.innerWidth * 0.9;
+        canva.height = window.innerHeight * 0.8;
+        context.clearRect(0, 0, canva.width, canva.height);
+        context.translate(canva.width / 2, canva.height);
+        context.scale(1/2, 1/2);
+        stickPlant.iterate(2);
+        stickPlant.final();
+    };
+};
+    </script>
+</body>
+</html>

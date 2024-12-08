@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Noise L-System</title>
+    <script src="../lindenmayer.browser.js"></script>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            overflow: hidden; 
+            display: flex;
+            flex-direction: column; 
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #100f0f; 
+        }
+        h1 {
+            color: #fff; 
+            margin: 0 0 20px 0; 
+            font-family: Arial, sans-serif;
+            font-size: 2rem; 
+            text-align: center;
+        }
+        canvas {
+            background-color: #000; 
+            border: 2px solid #444;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.7); 
+            max-width: 90vw; 
+            max-height: 80vh; 
+        }
+    </style>
+</head>
+<body>
+    <h1>Noise L-System Visualization</h1>
+    <canvas id="canva"></canvas>
+</body>
+<script src="noise.js"></script>
+</html>

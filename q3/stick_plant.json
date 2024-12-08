@@ -1,0 +1,55 @@
+{
+  "axiom": "F",
+  "productions": {
+    "F": "S[+F]F[-F]SF",
+    "S": "SS"
+  },
+  "finals": {
+    "F": {
+      "action": "draw",
+      "instructions": [
+        { "type": "moveTo", "x": 0, "y": 0 },
+        { "type": "lineTo", "x": 0, "y": 100 },
+        { "type": "strokeStyle", "color": "lightgreen" },
+        { "type": "stroke" },
+        { "type": "translate", "x": 0, "y": 100 }
+      ],
+      "effect": [
+        "draws a line of length 100 with lightgreen color"
+      ]
+    },
+    "S": {
+      "action": "draw",
+      "instructions": [
+        { "type": "moveTo", "x": 0, "y": 0 },
+        { "type": "lineTo", "x": 0, "y": 100 },
+        { "type": "strokeStyle", "color": "lightgreen" },
+        { "type": "stroke" },
+        { "type": "translate", "x": 0, "y": 100 }
+      ],
+      "effect": [
+        "draws a line of length 100 with lightgreen color"
+      ]
+    },
+    "+": {
+      "action": "rotate",
+      "angle": 45
+    },
+    "-": {
+      "action": "rotate",
+      "angle": -45
+    },
+    "[": {
+      "action": "saveState"
+    },
+    "]": {
+      "action": "restoreState"
+    }
+  },
+  "canvas": {
+    "translate": { "x": "canva.width / 2", "y": "canva.height" },
+    "rotate": 180,
+    "scale": { "x": 0.25, "y": 0.25 },
+    "lineWidth": 3
+  }
+}

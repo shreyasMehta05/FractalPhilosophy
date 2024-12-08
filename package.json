@@ -1,0 +1,5 @@
+{
+  "dependencies": {
+    "lindenmayer": "^1.5.4"
+  }
+}

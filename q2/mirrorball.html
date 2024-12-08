@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ball L-System</title>
+    <script src="../lindenmayer.browser.js"></script>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #1a1a1a;
+            color: #fff;
+            font-family: Arial, sans-serif;
+        }
+        canvas {
+            background-color: #100f0f;
+            border: 2px solid #444;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
+        }
+        h1 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div>
+        <h1>L-System Ball</h1>
+        <canvas id="canva"></canvas>
+    </div>
+    <script src="mirrorball.js"></script>
+</body>
+</html>
+
